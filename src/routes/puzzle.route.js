@@ -1,17 +1,17 @@
 const express = require('express');
-const router = express.Router();
+const puzzleRouter = express.Router();
 const {
   getAllPuzzles,
   getPuzzle,
   createPuzzle,
   updatePuzzle,
   deletePuzzle,
-} = require('../controllers/puzzle.controller');
+} = require('../controllers/');
 
-router.get('/', getAllPuzzles);
-router.get('/:id', getPuzzle);
-router.post('/create', createPuzzle);
-router.patch('/update', updatePuzzle);
-router.delete('/delete', deletePuzzle);
+puzzleRouter.get('/', getAllPuzzles);
+puzzleRouter.get('/:id', getPuzzle);
+puzzleRouter.post('/create', createPuzzle);
+puzzleRouter.patch('/update', updatePuzzle);
+puzzleRouter.delete('/delete', deletePuzzle);
 
-module.exports = router;
+module.exports = puzzleRouter;

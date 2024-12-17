@@ -3,8 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 require('dotenv').config();
-const usersRouter = require('./routes/user.route');
-const puzzleRouter = require('./routes/puzzle.route');
+
+const { userRouter, puzzleRouter } = require('./routes');
 
 mongoose
   .connect(process.env.DATABASE_URL)
@@ -18,7 +18,7 @@ mongoose
 app.use(express.json());
 
 // Routers
-app.use('/users', usersRouter);
+app.use('/users', userRouter);
 app.use('/puzzles', puzzleRouter);
 
 app.listen(process.env.PORT, () => {
