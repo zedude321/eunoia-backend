@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const app = express();
 require('dotenv').config();
 
-const { userRouter, puzzleRouter } = require('./routes');
+const { userRouter, puzzleRouter, roomRouter } = require('./routes');
 
 mongoose
   .connect(process.env.DATABASE_URL)
@@ -20,6 +20,7 @@ app.use(express.json());
 // Routers
 app.use('/users', userRouter);
 app.use('/puzzles', puzzleRouter);
+app.use('/rooms', roomRouter);
 
 app.listen(process.env.PORT, () => {
   console.log('Server started');
