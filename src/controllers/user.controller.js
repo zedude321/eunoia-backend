@@ -1,4 +1,4 @@
-const User = require('../models/');
+const { User } = require('../models/');
 
 const getAllUsers = async (_req, res) => {
   try {
@@ -42,7 +42,8 @@ const updateUser = async (req, res) => {
 
 const addFriend = async (req, res) => {
   const { id, friendId } = req.body;
-  if (id == friendId) return res.status(500).json({ message: 'Cannot add yourself as a friend' });
+  if (id == friendId)
+    return res.status(500).json({ message: 'Cannot add yourself as a friend' });
   try {
     const user = await User.findByIdAndUpdate(
       id,
@@ -60,7 +61,7 @@ const addFriend = async (req, res) => {
 // eslint-disable-next-line no-unused-vars
 const addExperience = async (_req, _res) => {
   // TODO: Waiting for Experience model
-}
+};
 
 const deleteUser = async (req, res) => {
   const { id } = req.body;
