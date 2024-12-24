@@ -9,10 +9,10 @@ const getAllExperiences = async (_req, res) => {
   }
 };
 
-const getExperience = async (requestAnimationFrame, res) => {
+const getExperience = async (req, res) => {
   try {
     const experience = await Experience.findById(
-      requestAnimationFrame.params.id
+      req.params.id
     );
     if (!experience)
       return res.status(404).json({ message: 'Experience not found' });
