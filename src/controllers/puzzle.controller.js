@@ -1,4 +1,4 @@
-const Puzzle = require('../models/');
+const { Puzzle } = require('../models/');
 
 const getAllPuzzles = async (_req, res) => {
   try {

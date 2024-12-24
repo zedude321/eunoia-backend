@@ -1,5 +1,6 @@
 const puzzleCtrls = require('./puzzle.controller')
 const userCtrls = require('./user.controller')
-const roomCtrls = require('./room.controller')
+const roomCtrls = require('./room.controller');
+const itemCtrls = require('./item.controller');
 
-module.exports = {...puzzleCtrls, ...userCtrls, ...roomCtrls}
+module.exports = { ...puzzleCtrls, ...userCtrls, ...itemCtrls, ...roomCtrls };
