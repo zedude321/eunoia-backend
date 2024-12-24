@@ -1,17 +1,25 @@
-const express = require('express');
+const express = require("express");
 const userRouter = express.Router();
 const {
-  getAllPuzzles,
-  getPuzzle,
-  createPuzzle,
-  updatePuzzle,
-  deletePuzzle,
-} = require('../controllers/');
+  getAllUsers,
+  getUser,
+  createUser,
+  updateUser,
+  deleteUser,
+  addFriend,
+  addExperience
+} = require('../controllers/')
 
-userRouter.get('/', getAllPuzzles);
-userRouter.get('/:id', getPuzzle);
-userRouter.post('/create', createPuzzle);
-userRouter.patch('/update', updatePuzzle);
-userRouter.delete('/delete', deletePuzzle);
+userRouter.get("/", getAllUsers);
+
+userRouter.get("/:id", getUser);
+
+userRouter.post("/create", createUser);
+
+userRouter.patch("/update", updateUser);
+userRouter.patch("/add-friend", addFriend);
+userRouter.patch("/add-experience", addExperience);
+
+userRouter.delete("/delete", deleteUser);
 
 module.exports = userRouter;
