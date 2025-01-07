@@ -12,6 +12,6 @@ itemRouter.get('/', getAllItems);
 itemRouter.get('/:id', getItem);
 itemRouter.post('/create', createItem);
 itemRouter.patch('/update', updateItem);
-itemRouter.delete('/delete', deleteItem);
+itemRouter.delete('/delete/:id', deleteItem);
 
 module.exports = itemRouter;

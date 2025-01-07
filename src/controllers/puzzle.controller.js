@@ -41,9 +41,8 @@ const updatePuzzle = async (req, res) => {
 };
 
 const deletePuzzle = async (req, res) => {
-  const { id } = req.body;
   try {
-    const puzzle = await Puzzle.findByIdAndDelete(id);
+    const puzzle = await Puzzle.findByIdAndDelete(req.params.id);
     if (!puzzle) return res.status(404).json({ message: 'Puzzle not found' });
     res.status(201).json({ message: 'Puzzle deleted successfully' });
   } catch (err) {
