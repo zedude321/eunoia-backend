@@ -12,6 +12,6 @@ puzzleRouter.get('/', getAllPuzzles);
 puzzleRouter.get('/:id', getPuzzle);
 puzzleRouter.post('/create', createPuzzle);
 puzzleRouter.patch('/update', updatePuzzle);
-puzzleRouter.delete('/delete', deletePuzzle);
+puzzleRouter.delete('/delete/:id', deletePuzzle);
 
 module.exports = puzzleRouter;

@@ -18,8 +18,9 @@ const ItemSubSchema = mongoose.Schema({
   id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'Item'
-  }
+    ref: 'Item',
+  },
+  _id: false,
 });
 
 const PuzzleSubSchema = mongoose.Schema({
@@ -34,8 +35,9 @@ const PuzzleSubSchema = mongoose.Schema({
   id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'Puzzle'
-  }
+    ref: 'Puzzle',
+  },
+  _id: false,
 });
 
 const RoomSchema = mongoose.Schema({
@@ -54,7 +56,7 @@ const RoomSchema = mongoose.Schema({
     required: true,
   },
   items: [ItemSubSchema],
-  puzzles: [PuzzleSubSchema]
+  puzzles: [PuzzleSubSchema],
 });
 
 const Room = mongoose.model('Room', RoomSchema);

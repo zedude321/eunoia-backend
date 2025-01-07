@@ -58,15 +58,41 @@ const addFriend = async (req, res) => {
   }
 };
 
+const removeFriend = async (req, res) => {
+  const { id, friendId } = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $pull: { friends: friendId } }
+    )
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    const updatedUser = await User.findById(id);
+    res.status(201).json(updatedUser);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
 // eslint-disable-next-line no-unused-vars
 const addExperience = async (_req, _res) => {
   // TODO: Waiting for Experience model
 };
+// eslint-disable-next-line no-unused-vars
+const removeExperience = async (_req, _res) => {
+  // TODO: Waiting for Experience model
+};
+// eslint-disable-next-line no-unused-vars
+const addCosmetic = async (_req, _res) => {
+  // TODO: Waiting for Cosmetic model
+};
+// eslint-disable-next-line no-unused-vars
+const removeCosmetic = async (_req, _res) => {
+  // TODO: Waiting for Cosmetic model
+};
+
 
 const deleteUser = async (req, res) => {
-  const { id } = req.body;
   try {
-    const user = await User.findByIdAndDelete(id);
+    const user = await User.findByIdAndDelete(req.params.id);
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.status(201).json({ message: 'User deleted successfully' });
   } catch (err) {
@@ -80,6 +106,10 @@ module.exports = {
   createUser,
   updateUser,
   addFriend,
+  removeFriend,
   addExperience,
+  removeExperience,
+  addCosmetic,
+  removeCosmetic,
   deleteUser,
 };

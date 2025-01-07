@@ -26,7 +26,7 @@ const PuzzleSchema = mongoose.Schema({
     required: [true, 'Please enter puzzle description'],
   },
   reward: {
-    type: String, // TODO Temporary
+    type: [mongoose.Schema.Types.ObjectId],
     ref: 'Item',
     required: false,
     default: '',
