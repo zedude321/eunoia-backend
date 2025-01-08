@@ -3,6 +3,7 @@ const userCtrls = require('./user.controller');
 const roomCtrls = require('./room.controller');
 const itemCtrls = require('./item.controller');
 const experienceCtrls = require('./experience.controller');
+const cosmeticCtrls = require('./cosmetic.controller');
 
 module.exports = {
   ...puzzleCtrls,
@@ -10,4 +11,5 @@ module.exports = {
   ...itemCtrls,
   ...roomCtrls,
   ...experienceCtrls,
+  ...cosmeticCtrls
 };
