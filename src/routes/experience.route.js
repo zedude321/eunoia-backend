@@ -12,6 +12,6 @@ experienceRouter.get('/', getAllExperiences);
 experienceRouter.get('/:id', getExperience);
 experienceRouter.post('/create', createExperience);
 experienceRouter.patch('/update', updateExperience);
-experienceRouter.delete('/delete', deleteExperience);
+experienceRouter.delete('/delete/:id', deleteExperience);
 
 module.exports = experienceRouter;

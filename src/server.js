@@ -2,7 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const cors = require("cors");
+const cors = require('cors');
 app.use(cors());
 require('dotenv').config();
 
@@ -13,6 +13,7 @@ const {
   itemRouter,
   experienceRouter,
 } = require('./routes');
+const cosmeticRouter = require('./routes/cosmetic.route');
 
 mongoose
   .connect(process.env.DATABASE_URL)
@@ -31,6 +32,7 @@ app.use('/puzzles', puzzleRouter);
 app.use('/rooms', roomRouter);
 app.use('/items', itemRouter);
 app.use('/experiences', experienceRouter);
+app.use('/cosmetics', cosmeticRouter);
 
 app.listen(process.env.PORT, () => {
   console.log('Server started');
