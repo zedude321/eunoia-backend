@@ -21,12 +21,12 @@ userRouter.get('/:id', getUser);
 userRouter.post('/create', createUser);
 
 userRouter.patch('/update', updateUser);
-userRouter.patch('/add-friend', addFriend);
-userRouter.patch('/remove-friend', removeFriend);
-userRouter.patch('/add-experience', addExperience);
-userRouter.patch('/remove-experience', removeExperience);
-userRouter.patch('/add-cosmetic', addCosmetic);
-userRouter.patch('/remove-cosmetic', removeCosmetic);
+userRouter.patch('/addFriend', addFriend);
+userRouter.patch('/removeFriend', removeFriend);
+userRouter.patch('/addExperience', addExperience);
+userRouter.patch('/removeExperience', removeExperience);
+userRouter.patch('/addCosmetic', addCosmetic);
+userRouter.patch('/removeCosmetic', removeCosmetic);
 
 userRouter.delete('/delete/:id', deleteUser);
 
