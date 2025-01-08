@@ -41,54 +41,98 @@ const updateUser = async (req, res) => {
 };
 
 const addFriend = async (req, res) => {
-  const { id, friendId } = req.body;
-  if (id == friendId)
+  let { id, friendId } = req.body;
+  if (!Array.isArray(friendId)) friendId = [friendId];
+  if (friendId.includes(id))
     return res.status(500).json({ message: 'Cannot add yourself as a friend' });
   try {
     const user = await User.findByIdAndUpdate(
       id,
-      { $addToSet: { friends: friendId } },
+      { $addToSet: { friends: { $each: friendId } } },
       { new: true }
     );
     if (!user) return res.status(404).json({ message: 'User not found' });
-    const updatedUser = await User.findById(id);
-    res.status(201).json(updatedUser);
+    res.status(201).json(user);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
 const removeFriend = async (req, res) => {
-  const { id, friendId } = req.body;
+  let { id, friendId } = req.body;
+  if (!Array.isArray(friendId)) friendId = [friendId]
   try {
     const user = await User.findByIdAndUpdate(
       id,
-      { $pull: { friends: friendId } }
-    )
+      { $pull: { friends: { $in: friendId } } },
+      { new: true }
+    );
     if (!user) return res.status(404).json({ message: 'User not found' });
-    const updatedUser = await User.findById(id);
-    res.status(201).json(updatedUser);
+    res.status(201).json(user);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-}
-// eslint-disable-next-line no-unused-vars
-const addExperience = async (_req, _res) => {
-  // TODO: Waiting for Experience model
-};
-// eslint-disable-next-line no-unused-vars
-const removeExperience = async (_req, _res) => {
-  // TODO: Waiting for Experience model
-};
-// eslint-disable-next-line no-unused-vars
-const addCosmetic = async (_req, _res) => {
-  // TODO: Waiting for Cosmetic model
-};
-// eslint-disable-next-line no-unused-vars
-const removeCosmetic = async (_req, _res) => {
-  // TODO: Waiting for Cosmetic model
 };
 
+const addExperience = async (req, res) => {
+  const { id, experienceId } = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $addToSet: { owned_experiences: { $each: experienceId } } },
+      { new: true }
+    );
+    res.status(201).json(user);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const removeExperience = async (req, res) => {
+  let { id, experienceId } = req.body;
+  if (!Array.isArray(experienceId)) experienceId = [experienceId]
+  try {
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $pull: { owned_experiences: { $in: experienceId } } },
+      { new: true }
+    );
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.status(201).json(user);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const addCosmetic = async (req, res) => {
+  const { id, cosmeticId } = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $addToSet: { owned_cosmetics: { $each: cosmeticId } } },
+      { new: true }
+    );
+    res.status(201).json(user);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const removeCosmetic = async (req, res) => {
+  let { id, cosmeticId } = req.body;
+  if (!Array.isArray(cosmeticId)) cosmeticId = [cosmeticId]
+  try {
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $pull: { owned_cosmetics: { $in: cosmeticId } } },
+      { new: true }
+    );
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.status(201).json(user);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
 const deleteUser = async (req, res) => {
   try {
