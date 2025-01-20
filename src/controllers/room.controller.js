@@ -59,11 +59,12 @@ const changeItem = async (req, res) => {
 };
 
 const addItem = async (req, res) => {
-  const { id, update } = req.body;
+  let { id, update } = req.body;
+  if (!Array.isArray(update)) update = [update];
   try {
     const room = await Room.findByIdAndUpdate(
       id,
-      { $push: { items: update } },
+      { $push: { items: { $each: update } } },
       { new: true }
     );
 
@@ -74,14 +75,15 @@ const addItem = async (req, res) => {
 };
 
 const removeItem = async (req, res) => {
-  const { id, itemId } = req.body;
+  let { id, itemId } = req.body;
+  if (!Array.isArray(itemId)) itemId = [itemId];
   try {
     const room = await Room.findByIdAndUpdate(
       id,
-      { $pull: { items: { id: itemId } } },
+      { $pull: { items: { id: { $in: itemId } } } },
       { new: true }
     );
-    
+
     res.status(201).json(room);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -107,11 +109,12 @@ const changePuzzle = async (req, res) => {
 };
 
 const addPuzzle = async (req, res) => {
-  const { id, update } = req.body;
+  let { id, update } = req.body;
+  if (!Array.isArray(update)) update = [update];
   try {
     const room = await Room.findByIdAndUpdate(
-      id,
-      { $push: { puzzles: update } },
+      id, 
+      { $push: { puzzles: { $each: update } } },
       { new: true }
     );
 
@@ -122,14 +125,15 @@ const addPuzzle = async (req, res) => {
 };
 
 const removePuzzle = async (req, res) => {
-  const { id, puzzleId } = req.body;
+  let { id, puzzleId } = req.body;
+  if (!Array.isArray(puzzleId)) puzzleId = [puzzleId];
   try {
     const room = await Room.findByIdAndUpdate(
       id,
-      { $pull: { puzzles: { id: puzzleId } } },
+      { $pull: { puzzles: { id: { $in: puzzleId } } } },
       { new: true }
     );
-    
+
     res.status(201).json(room);
   } catch (err) {
     res.status(500).json({ message: err.message });

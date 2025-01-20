@@ -75,7 +75,8 @@ const removeFriend = async (req, res) => {
 };
 
 const addExperience = async (req, res) => {
-  const { id, experienceId } = req.body;
+  let { id, experienceId } = req.body;
+  if (!Array.isArray(experienceId)) experienceId = [experienceId]
   try {
     const user = await User.findByIdAndUpdate(
       id,
@@ -105,7 +106,8 @@ const removeExperience = async (req, res) => {
 };
 
 const addCosmetic = async (req, res) => {
-  const { id, cosmeticId } = req.body;
+  let { id, cosmeticId } = req.body;
+  if (!Array.isArray(cosmeticId)) cosmeticId = [cosmeticId]
   try {
     const user = await User.findByIdAndUpdate(
       id,
